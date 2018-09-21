@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pickle
+from nltk.corpus import inaugural
 
 '''
 Deserializes pickled list using pickle
@@ -13,6 +14,16 @@ def depickler():
     fin.close()
 
     return listsIn
+
+'''
+Gets list of years to be displayed on x-axis
+Returns list of years
+'''
+def yearList():
+    yearList = []
+    for file_id in inaugural.fileids():
+        yearList.append(file_id.split('-')[0])
+    return yearList
 
 '''
 Gets a word from user to check frequency of
@@ -45,8 +56,8 @@ Plots frequency of word appearence for each inaugural address
 frequencyDict is dictionary of addresses and frquencies to be plotted
 Plot is displayed with address index on the x-axis and frequency on the y-axis
 '''
-def plotFrequency(frequencyDict):
-    x = [address for address in frequencyDict]
+def plotFrequency(frequencyDict, yearList):
+    x = [year for year in yearList]
     y = [frequencyDict[address] for address in frequencyDict]
     plt.plot(x,y)
     plt.show()
@@ -55,6 +66,7 @@ def main():
     listIn = depickler()
     searchWord = getWord()
     freqDict = freq_table(searchWord, listIn)
-    plotFrequency(freqDict)
+    years = yearList()
+    plotFrequency(freqDict, years)
 
 main()

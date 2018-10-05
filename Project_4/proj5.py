@@ -51,25 +51,33 @@ Post: alignment of source and target is printed in form outlined in textbook
 def outputAlignment(source, target, dist):
     col = len(target)
     row = len(source)
-    s = len(target) - 1
-    t = len(source) - 1
+    t = len(target) - 1
+    s = len(source) - 1
+    strSource = ''
+    strTarget = ''
 
     while (s >= 0 or t >= 0):
-        if (dist[col, row] == dist[col - 1, row - 1] + subCost(target[col - 1], source[row - 1])):
-            print source[s], target[t]
+        if (dist[col, row] == dist[col - 1, row - 1] + subCost(target[col - 1], 
+            source[row - 1])):
+            strSource += source[s] + ' '
+            strTarget += target[t] + ' ' 
             col -= 1
             row -= 1
             t -= 1
             s -= 1
         elif (dist[col, row] == dist[col - 1, row] + 1):
-            print '*', target[t]
+            strSource +='*' + ' ' 
+            strTarget += target[t] + ' ' 
             col -= 1            
             t -= 1
         elif (dist[col, row - 1] == dist[col, row] - 1):
-            print source[s], '*'
+            strSource += source[s] + ' '
+            strTarget += '*' + ' ' 
             row -= 1
             s -= 1
 
+    print strSource[::-1]
+    print strTarget[::-1]
     print
 
     return
@@ -78,7 +86,9 @@ def main():
     source = sys.argv[1]
     target = sys.argv[2]
     distanceMatrix = minimumEditDistance(source, target)
-    print "\nMinimum edit distance:", distanceMatrix[len(source), len(target)], '\n'
+
+    print "\nMinimum edit distance:", distanceMatrix[len(target), len(source)]
+    print
     outputAlignment(source, target, distanceMatrix)
 
 main()

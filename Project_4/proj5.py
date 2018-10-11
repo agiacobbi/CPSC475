@@ -64,6 +64,8 @@ def outputAlignment(source, target, dist):
             strTarget += target[t] + ' ' 
             if (subCost(target[col - 1], source[row - 1]) == 2):
                 strAction += 's '
+            else: 
+                strAction += '  '
             col -= 1
             row -= 1
             t -= 1

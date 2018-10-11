@@ -29,7 +29,7 @@ def minimumEditDistance(source, target):
                               dist[col - 1, row - 1] + 
                               subCost(target[col - 1], source[row - 1]),
                               dist[col, row - 1] + 1)
-    
+
     return dist
 
 '''
@@ -55,29 +55,35 @@ def outputAlignment(source, target, dist):
     s = len(source) - 1
     strSource = ''
     strTarget = ''
+    strAction = ''
 
     while (s >= 0 or t >= 0):
         if (dist[col, row] == dist[col - 1, row - 1] + subCost(target[col - 1], 
             source[row - 1])):
             strSource += source[s] + ' '
             strTarget += target[t] + ' ' 
+            if (subCost(target[col - 1], source[row - 1]) == 2):
+                strAction += 's '
             col -= 1
             row -= 1
             t -= 1
             s -= 1
         elif (dist[col, row] == dist[col - 1, row] + 1):
-            strSource +='*' + ' ' 
-            strTarget += target[t] + ' ' 
+            strSource += '*' + ' ' 
+            strTarget += target[t] + ' '
+            strAction += 'i '
             col -= 1            
             t -= 1
         elif (dist[col, row - 1] == dist[col, row] - 1):
             strSource += source[s] + ' '
-            strTarget += '*' + ' ' 
+            strTarget += '*' + ' '
+            strAction += 'd ' 
             row -= 1
             s -= 1
 
     print strSource[::-1]
     print strTarget[::-1]
+    print strAction[::-1]
     print
 
     return

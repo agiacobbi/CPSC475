@@ -1,5 +1,6 @@
-import re
 import pickle
+from itertools import islice
+import random
 
 def pickler(pickleDict):    
     fout = open('proj7b.pkl','wb')
@@ -14,10 +15,10 @@ def tokenizeText(fileName):
     for line in inputFile:
         words = []
         if (line != '\n'):
-            words.append('<s>')
+            #words.append('<s>')
             for word in line.split():
                 words.append(tokenizeWord(word))
-            words.append('</s>')
+            #words.append('</s>')
         sents.append(words)
 
     return sents
@@ -36,6 +37,7 @@ def tokenizeWord(word):
 
 def makeProbabilityDict(sents, n):
     probDict = {}
+    probList = []
     nList = ngrams(sents, n)
     numWords = float(len(nList))
     cumProb = 0.0
@@ -48,11 +50,10 @@ def makeProbabilityDict(sents, n):
             probDict[word] = 1.0
 
     for item in probDict:
-        probDict[item] = (probDict[item] / numWords)
-        cumProb += probDict[item]
-        probDict[item] = cumProb
+        probList.append((item, cumProb + (probDict[item] / numWords)))
+        cumProb += (probDict[item] / numWords)
 
-    return probDict 
+    return probList
 
 def ngramToString(ngram):
     nString = ''
@@ -63,8 +64,8 @@ def ngramToString(ngram):
     return nString[:-1]
 
 def ngrams(inList, n):
-    if (n == 1):
-        return inList
+    #if (n == 1):
+        #return inList
 
     output = []
     for sent in inList:
@@ -73,12 +74,13 @@ def ngrams(inList, n):
 
     return output
 
+
 def main():
     lines = tokenizeText('shakespeare.txt')
-    probDict = {1:makeProbabilityDict(lines, 1), 
-                2:makeProbabilityDict(lines, 2),
-                3:makeProbabilityDict(lines, 3),
-                4:makeProbabilityDict(lines, 4)}
+    probDict = [makeProbabilityDict(lines, 1), 
+                makeProbabilityDict(lines, 2),
+                makeProbabilityDict(lines, 3),
+                makeProbabilityDict(lines, 4)]
 
     pickler(probDict)
 

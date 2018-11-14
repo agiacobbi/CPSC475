@@ -1,3 +1,10 @@
+'''
+Alex Giacobbi
+agiacobbi
+Test2a: Implementing the forward algorithm
+15 November 2018
+'''
+
 import numpy
 import csv
 import sys
@@ -59,6 +66,8 @@ def main():
 
     likelihood = forward(observation, A_Matrix, B_Matrix)
 
-    print "The likelihood of sequence:", sys.argv[3], "is", likelihood
+    print
+    print "The likelihood of sequence", sys.argv[3], "is", likelihood
+    print
 
 main()

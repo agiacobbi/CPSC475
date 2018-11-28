@@ -52,8 +52,7 @@ def forward(obsSeq, aMatrix, bMatrix):
             probMat[state][step] = probSum
 
     for state in range(1, n - 1):
-        likelihood += (probMat[state][t - 1] 
-                       * aMatrix[state][n - 1])
+        likelihood += (probMat[state][t - 1] * aMatrix[state][n - 1])
     probMat[n - 1][t - 1] = likelihood
 
     return probMat[n - 1][t - 1]

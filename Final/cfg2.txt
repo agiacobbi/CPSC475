@@ -1,0 +1,5 @@
+S AT | AB
+Q AT | AB
+T QB
+A a
+B b

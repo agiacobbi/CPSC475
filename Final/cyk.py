@@ -1,3 +1,10 @@
+'''
+Alex Giacobbi
+agiacobbi
+Test3C CYK Parser
+13 December 2018
+'''
+
 import sys
 import numpy
 

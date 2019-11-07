@@ -18,8 +18,15 @@ phonetic spelling rather than their written form.
 Computes and displays the minimum edit distance between two words using a dynamic programming algorithm.
 
 ## Project_5
-
+A random unigram generator. This program ouputs unigrams based on frequency of appearence in a given corpus.
 
 ## Project_6
+A random Shakespeare n-gram generator. This program expands on Project 5 to output some n-grams from Shakespeare's complete
+works. 
+
 ## TakeHomeTest
+This is an implementation of two Hidden Markov Model (HMM) algorithms, the forward algorithm and the backward (or Viterbi)
+algorithm. These are dynamic programming algorithms based on pseudocode found in the course textbook (Speech and Language Processing by Jurafsky & Martin)
+
 ## Final
+An implementation of a CYK Parser that indicates whether a given string is in a specified context free grammar.
